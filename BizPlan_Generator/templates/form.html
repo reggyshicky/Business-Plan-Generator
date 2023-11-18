@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Business Plan</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+        <form method="post" action="{% url 'create_business_plan' %}">
+            {% csrf_token %}
+
+            <label for="id_industry">Industry:</label>
+            {{ form.industry }}
+
+            <label for="id_target_market">Target Market:</label>
+            {{ form.target_market }}
+
+            <label for="id_unique_selling_proposition">Unique Selling Proposition:</label>
+            {{ form.unique_selling_proposition }}
+
+            <label for="id_specific_requirements">Specific Requirements:</label>
+            {{ form.specific_requirements }}
+
+            <label for="id_goals_and_objectives">Goals and Objectives:</label>
+            {{ form.goals_and_objectives }}
+
+            <label for="id_additional_information">Additional Information:</label>
+            {{ form.additional_information }}
+
+            <input type="submit" value="Create Business Plan">
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+
+  
