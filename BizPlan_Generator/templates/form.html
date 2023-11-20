@@ -7,12 +7,12 @@
     <title>Create Business Plan</title>
 
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
 </head>
 
-<body>
+<body class="formbody">
 
-    <div class="container">
+    <div class="container newform">
         <form method="post" action="{% url 'create_business_plan' %}">
             {% csrf_token %}
 
