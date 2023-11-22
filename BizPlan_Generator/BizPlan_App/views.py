@@ -5,7 +5,6 @@ from django.shortcuts import render
 from .forms import BusinessPlanForm
 from .contact_form import ContactForm
 from openai import OpenAI
-from .models import ContactResponse
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from reportlab.lib.pagesizes import letter

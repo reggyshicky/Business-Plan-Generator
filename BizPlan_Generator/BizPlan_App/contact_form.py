@@ -4,4 +4,4 @@ from .models import ContactResponse
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactResponse
-        fields = ['fullname', 'email', 'remarks']
+        fields = '__all__'
