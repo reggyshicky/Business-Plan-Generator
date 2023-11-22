@@ -1,5 +1,23 @@
-{% for entry in responses %}
-    <h2>{{ entry.section }}</h2>
-    <p>{{ entry.response }}</p>
-    <hr>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Generated Business Plan</title>
+        <link href="../static/css/generated.css" rel="stylesheet">
+    </head>
+    <body>
+        {% for entry in responses %}
+        <h2>{{ entry.section }}</h2>
+        <p>{{ entry.response }}</p>
+        <hr>
+        {% endfor %}
+        <form method="post" action="{% url 'export_to_pdf' %}" style="margin-top: 20px;">
+            {% csrf_token %}
+            <button type="submit">Export to PDF</button>
+        </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </body>
+</html>
+
