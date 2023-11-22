@@ -1,23 +1,16 @@
 import os
-<<<<<<< HEAD
 from django.shortcuts import redirect, render
-=======
 import re
 from django.shortcuts import render
->>>>>>> master
 from .forms import BusinessPlanForm
 from .contact_form import ContactForm
 from openai import OpenAI
-<<<<<<< HEAD
 from .models import ContactResponse
-
-=======
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from io import BytesIO
->>>>>>> master
 
 
 def home(request):
@@ -80,7 +73,6 @@ def create_business_plan(request):
         form = BusinessPlanForm()
 
     return render(request, 'form.html', {'form': form})
-<<<<<<< HEAD
 
 def thank_you(request):
     if request.method == 'POST':
@@ -91,7 +83,6 @@ def thank_you(request):
             return render(request, 'thank_you.html', {'response': response})
         
     return render(request, 'thank_you.html')
-=======
     
     
 
@@ -191,4 +182,3 @@ def render_html_to_pdf(html_content):
         
 
     # return render(request, 'form.html', {'form': form})
->>>>>>> master
