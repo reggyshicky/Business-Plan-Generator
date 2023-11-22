@@ -1,8 +1,11 @@
 import os
+from django.shortcuts import redirect, render
 import re
 from django.shortcuts import render
 from .forms import BusinessPlanForm
+from .contact_form import ContactForm
 from openai import OpenAI
+from .models import ContactResponse
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from reportlab.lib.pagesizes import letter
@@ -70,6 +73,16 @@ def create_business_plan(request):
         form = BusinessPlanForm()
 
     return render(request, 'form.html', {'form': form})
+
+def thank_you(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            response = form.save()
+            return render(request, 'thank_you.html', {'response': response})
+        
+    return render(request, 'thank_you.html')
     
     
 
