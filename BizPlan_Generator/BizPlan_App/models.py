@@ -16,3 +16,14 @@ class BusinessPlan(models.Model):
     specific_requirements = models.TextField()
     goals_and_objectives = models.TextField()
     additional_information = models.TextField(blank=True, null=True)
+
+
+
+# Responses from our contacts section
+class ContactResponse(models.Model):
+    fullname = models.CharField(max_length=255)
+    email = models.EmailField()
+    remarks = models.TextField()
+    
+    def __str__(self):
+        return self.fullname
