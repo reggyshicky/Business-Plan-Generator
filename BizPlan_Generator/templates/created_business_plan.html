@@ -13,12 +13,22 @@
         <p>{{ entry.response }}</p>
         <hr>
         {% endfor %}
-        <form method="post" action="{% url 'export_to_pdf' %}" style="margin-top: 20px;">
-            {% csrf_token %}
-            <button type="submit">Export to PDF</button>
-        </form>
+        <div class="row">
+          <div>
+            <form method="post" action="{% url 'export_to_pdf' %}" style="margin-top: 20px;">
+              {% csrf_token %}
+              <button type="submit">Export to PDF</button>
+          </form>
+          </div>
+          <br>
+          <div>
+            <button id="copyButton">Copy to Clipboard</button>
+          </div>
+        </div>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/clipboard.js/2.0.8/clipboard.min.js"></script>
+        <script src="/static/copy.js"></script>
         <script type="text/javascript">
             (function(d, t) {
                 var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
