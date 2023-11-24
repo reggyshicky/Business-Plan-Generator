@@ -6,10 +6,6 @@ from .forms import BusinessPlanForm
 from .contact_form import ContactForm
 from openai import OpenAI
 from django.http import HttpResponse
-from django.template.loader import render_to_string
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-from io import BytesIO
 
 
 def home(request):
@@ -58,7 +54,7 @@ def create_business_plan(request):
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": prompt}
                     ],
-                    max_tokens = 20,
+                    max_tokens = 5,
                     temperature = 0.5
                 )
 
@@ -82,54 +78,7 @@ def thank_you(request):
             return render(request, 'thank_you.html', {'response': response})
         
     return render(request, 'thank_you.html')
-    
-    
-
-
-def export_to_pdf(request):
-    if request.method == 'POST':
-        responses = request.POST.get('responses')
-        html_content = render_to_string('created_business_plan.html', {'responses': responses})
-
-        # Convert HTML to PDF using ReportLab.
-        pdf_buffer = render_html_to_pdf(html_content)
-
-        # Create a Django response with the PDF file.
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="business_plan.pdf"'
-
-        # Write the PDF file to the response.
-        response.write(pdf_buffer.getvalue())
-        return response
-    else:
-        return HttpResponse('Invalid request method')
-
-def render_html_to_pdf(html_content):
-    # Create a buffer to receive PDF data.
-    buffer = BytesIO()
-
-    # Create the PDF object using ReportLab.
-    pdf = canvas.Canvas(buffer, pagesize=letter)
-    
-    # Set font and size (optional)
-    pdf.setFont("Helvetica", 12)
-
-    # Draw the HTML content on the PDF.
-    pdf.drawString(100, 750, "Generated Business Plan PDF")  # Adjust position as needed
-    pdf.drawString(100, 730, html_content)  # Adjust position as needed
-
-    # Close the PDF object cleanly, and we're done.
-    pdf.showPage()
-    pdf.save()
-
-    # File response with the PDF data.
-    buffer.seek(0)
-    return buffer
-
-    
-    
-    
-    
+        
     # if request.method == 'POST':
     #     form = BusinessPlanForm(request.POST)
     #     if form.is_valid():

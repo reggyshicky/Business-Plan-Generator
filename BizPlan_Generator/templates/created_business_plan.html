@@ -6,42 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Generated Business Plan</title>
         <link href="../static/css/generated.css" rel="stylesheet">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
     </head>
     <body>
+
+      <!-- Display your responses -->
+      <div class="business-plan-content">
         {% for entry in responses %}
-        <h2>{{ entry.section }}</h2>
-        <p>{{ entry.response }}</p>
-        <hr>
+         <h2>{{ entry.section }}</h2>
+         <p>{{ entry.response }}</p>
+         <hr>
         {% endfor %}
-        <div class="row">
-          <div>
-            <form method="post" action="{% url 'export_to_pdf' %}" style="margin-top: 20px;">
-              {% csrf_token %}
-              <button type="submit">Export to PDF</button>
-          </form>
-          </div>
-          <br>
-          <div>
-            <button id="copyButton">Copy to Clipboard</button>
-          </div>
-        </div>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/clipboard.js/2.0.8/clipboard.min.js"></script>
-        <script src="/static/copy.js"></script>
-        <script type="text/javascript">
-            (function(d, t) {
-                var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-                v.onload = function() {
-                  window.voiceflow.chat.load({
-                    verify: { projectID: '6553236550d94e00072d114c' },
-                    url: 'https://general-runtime.voiceflow.com',
-                    versionID: 'production'
-                  });
-                }
-                v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-            })(document, 'script');
-          </script>
+      </div>
+      <div>
+        <button id="copyButton">Copy to Clipboard</button>
+      </div>
+      <br>
+      <button onclick="CreatePDFfromHTML()">Download PDF</button>
+
+      <script>
+        // Create PDF from HTML...
+        // Create PDF from HTML...
+        function CreatePDFfromHTML() {
+            var HTML_Width = $(".business-plan-content").width();
+            var HTML_Height = $(".business-plan-content").height();
+            var top_left_margin = 15;
+            var additional_margin = 10; // Adjust this value as needed for your margin
+            var PDF_Width = HTML_Width + (top_left_margin * 2) + (additional_margin * 2);
+            var PDF_Height = HTML_Height + (top_left_margin * 2) + (additional_margin * 2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+
+            html2canvas($(".business-plan-content")[0]).then(function (canvas) {
+                var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+
+                // Adjusting the parameters to fit content with additional margin
+                pdf.addImage(imgData, 'JPG', top_left_margin + additional_margin, top_left_margin + additional_margin, canvas_image_width, canvas_image_height);
+                pdf.save("Generated_Business_Plan.pdf");
+            });
+        }
+      </script>    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/clipboard.js/2.0.8/clipboard.min.js"></script>
+      <script src="/static/copy.js"></script>
+      <script type="text/javascript">
+        (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '6553236550d94e00072d114c' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production'
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+      </script>
     </body>
 </html>
-
