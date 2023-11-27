@@ -18,9 +18,7 @@ class BusinessPlan(models.Model):
     additional_information = models.TextField(blank=True, null=True)
 
 
-
-# Responses from our contacts section
-class ContactResponse(models.Model):
-    fullname = models.CharField(max_length=255)
+class Feedback(models.Model):
+    name = models.CharField(max_length=100)
     email = models.EmailField()
     remarks = models.TextField()
