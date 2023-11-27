@@ -1,0 +1,52 @@
+/* Basic styling for form controls */
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+/* Custom styling for the specific input with ID "username" */
+#username {
+    /* Add any additional styles you want for this specific input */
+    /* For example, changing the border color */
+    border-color: #28a745; /* Green color as an example */
+}
+
+/* Styling for required inputs (you can customize this further) */
+.form-control:required {
+    border-color: ; /* Red color as an example */
+}
+
+/* Styling for placeholder text */
+.form-control::placeholder {
+    color: #6c757d; /* Placeholder text color */
+}
+
+/* Add these styles to your existing CSS file or create a new one */
+
+/* Styling for the email input with ID "useremail" */
+#useremail {
+    /* Add any additional styles you want for this specific input */
+    /* For example, changing the border color */
+    border-color: ; /* Blue color as an example */
+}
+
+/* Styling for the textarea with the name "remarks" */
+textarea[name="remarks"] {
+    /* Add any additional styles you want for this specific textarea */
+    /* For example, adjusting the padding */
+    padding: 1rem;
+}
+
+/* Styling for required textarea inputs (you can customize this further) */
+textarea.form-control:required {
+    border-color: ; /* Red color as an example */
+}
+
+/* Styling for placeholder text in textarea */
+textarea.form-control::placeholder {
+    color: #6c757d; /* Placeholder text color */
+}

@@ -3,7 +3,8 @@ from django.shortcuts import redirect, render
 import re
 from django.shortcuts import render
 from .forms import BusinessPlanForm
-from .contact_form import ContactForm
+from .models import Feedback
+from .mycontactform import CreateFeedbackForm
 from openai import OpenAI
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -13,7 +14,16 @@ from io import BytesIO
 
 
 def home(request):
-    return render(request, 'home.html')
+    form = CreateFeedbackForm()
+
+    if request.method == 'POST':
+        form = CreateFeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save()
+            form = CreateFeedbackForm()
+            return render(request, 'thank_you.html', {'form': form})
+
+    return render(request, 'home.html', {'form': form})
 
 def create_business_plan(request):
     # predefined message for the chatGPT
@@ -73,17 +83,6 @@ def create_business_plan(request):
 
     return render(request, 'form.html', {'form': form})
 
-def thank_you(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-
-        if form.is_valid():
-            response = form.save()
-            return render(request, 'thank_you.html', {'response': response})
-        
-    return render(request, 'thank_you.html')
-    
-    
 
 
 def export_to_pdf(request):

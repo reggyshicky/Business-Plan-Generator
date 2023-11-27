@@ -1,6 +1,6 @@
-/* Add this CSS to your styles.css or in the head of your HTML file */
+
 body {
-    padding-top: 56px; /* Adjust this value based on your navbar height */
+    padding-top: 56px; 
 }
 
 /* For smaller screens, adjust the padding */
@@ -10,7 +10,6 @@ body {
     }
 }
 
-/* Adjust the margin of the content to create space below the navbar */
 #thank-you {
-    margin-top: 70px; /* Adjust this value based on the desired space */
+    margin-top: 70px; 
 }
